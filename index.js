@@ -15,9 +15,9 @@ app.use('/api/auth', require('./routes/auth'))
 app.use('/api/notes', require('./routes/notes'))
 
 if ( process.env.NODE_ENV == "production"){
-  app.use(express.static("frontend/build"));
   const path = require("path");
-  app.get("*", (req, res) => {
+  app.get("/", (req, res) => {
+      app.use(express.static(path.resolve(__dirname,'frontend','build')));
       res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
   })
 }
